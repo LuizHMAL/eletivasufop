@@ -313,93 +313,146 @@ export function MateriasTable({ grade = '2024_1', onMudarGrade }: MateriasTableP
                 )}
               </div>
             ) : (
-              <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                  <thead>
-                    <tr>
-                      <th
-                        onClick={() => alternarOrdenacao('codigo')}
-                        className={styles.thSortable}
-                        title="Clique para ordenar por código"
-                      >
-                        Código {campoOrdenacao === 'codigo' ? (ordemAscendente ? '▲' : '▼') : ''}
-                      </th>
-                      <th
-                        onClick={() => alternarOrdenacao('nome')}
-                        className={styles.thSortable}
-                        title="Clique para ordenar por nome"
-                      >
-                        Nome da Disciplina {campoOrdenacao === 'nome' ? (ordemAscendente ? '▲' : '▼') : ''}
-                      </th>
-                      <th
-                        onClick={() => alternarOrdenacao('obrigatoria')}
-                        className={styles.thSortable}
-                        title="Clique para ordenar por tipo"
-                      >
-                        Tipo {campoOrdenacao === 'obrigatoria' ? (ordemAscendente ? '▲' : '▼') : ''}
-                      </th>
-                      <th>Pré-requisitos</th>
-                      <th style={{ textAlign: 'center' }}>Ações</th>
-                    </tr>
-                  </thead>
+              <>
+                <div className={styles.tableContainer}>
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th
+                          onClick={() => alternarOrdenacao('codigo')}
+                          className={styles.thSortable}
+                          title="Clique para ordenar por código"
+                        >
+                          Código {campoOrdenacao === 'codigo' ? (ordemAscendente ? '▲' : '▼') : ''}
+                        </th>
+                        <th
+                          onClick={() => alternarOrdenacao('nome')}
+                          className={styles.thSortable}
+                          title="Clique para ordenar por nome"
+                        >
+                          Nome da Disciplina {campoOrdenacao === 'nome' ? (ordemAscendente ? '▲' : '▼') : ''}
+                        </th>
+                        <th
+                          onClick={() => alternarOrdenacao('obrigatoria')}
+                          className={styles.thSortable}
+                          title="Clique para ordenar por tipo"
+                        >
+                          Tipo {campoOrdenacao === 'obrigatoria' ? (ordemAscendente ? '▲' : '▼') : ''}
+                        </th>
+                        <th>Pré-requisitos</th>
+                        <th style={{ textAlign: 'center' }}>Ações</th>
+                      </tr>
+                    </thead>
 
-                  <tbody>
-                    {materiasFiltradas.map((m) => (
-                      <tr
-                        key={m.codigo}
-                        className={styles.tableRow}
-                        onClick={() => setMateriaSelecionada(m)}
-                      >
-                        <td>
+                    <tbody>
+                      {materiasFiltradas.map((m) => (
+                        <tr
+                          key={m.codigo}
+                          className={styles.tableRow}
+                          onClick={() => setMateriaSelecionada(m)}
+                        >
+                          <td>
+                            <span className={styles.codigoBadge}>{m.codigo}</span>
+                          </td>
+                          <td>
+                            <span className={styles.materiaNome}>{m.nome}</span>
+                          </td>
+                          <td>
+                            {m.obrigatoria ? (
+                              <span className={styles.badgeObrigatoria}>Obrigatória</span>
+                            ) : (
+                              <span className={styles.badgeEletiva}>Eletiva</span>
+                            )}
+                          </td>
+                          <td>
+                            {m.prerequisitos && m.prerequisitos.length > 0 ? (
+                              <div className={styles.prereqList}>
+                                {m.prerequisitos.map((pr) => {
+                                  const matPr = mapaMaterias.get(pr);
+                                  return (
+                                    <span
+                                      key={pr}
+                                      className={styles.prereqTag}
+                                      title={matPr ? `${pr} - ${matPr.nome}` : pr}
+                                    >
+                                      {pr}
+                                    </span>
+                                  );
+                                })}
+                              </div>
+                            ) : (
+                              <span className={styles.emptyPrereq}>Nenhum</span>
+                            )}
+                          </td>
+                          <td style={{ textAlign: 'center' }}>
+                            <button
+                              type="button"
+                              className={styles.viewBtn}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMateriaSelecionada(m);
+                              }}
+                            >
+                              Detalhes
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Lista em Cards para Dispositivos Móveis */}
+                <div className={styles.mobileCatalogList}>
+                  {materiasFiltradas.map((m) => (
+                    <div
+                      key={m.codigo}
+                      className={styles.mobileCatalogCard}
+                      onClick={() => setMateriaSelecionada(m)}
+                    >
+                      <div className={styles.mobileCatalogTop}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
                           <span className={styles.codigoBadge}>{m.codigo}</span>
-                        </td>
-                        <td>
-                          <span className={styles.materiaNome}>{m.nome}</span>
-                        </td>
-                        <td>
                           {m.obrigatoria ? (
                             <span className={styles.badgeObrigatoria}>Obrigatória</span>
                           ) : (
                             <span className={styles.badgeEletiva}>Eletiva</span>
                           )}
-                        </td>
-                        <td>
-                          {m.prerequisitos && m.prerequisitos.length > 0 ? (
-                            <div className={styles.prereqList}>
-                              {m.prerequisitos.map((pr) => {
-                                const materiaPr = mapaMaterias.get(pr);
-                                return (
-                                  <span
-                                    key={pr}
-                                    className={styles.prereqTag}
-                                    title={materiaPr ? `${pr} - ${materiaPr.nome}` : pr}
-                                  >
-                                    {pr}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            <span className={styles.emptyPrereq}>Nenhum</span>
-                          )}
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <button
-                            type="button"
-                            className={styles.viewBtn}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setMateriaSelecionada(m);
-                            }}
-                          >
-                            Detalhes
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                        </div>
+                        <button
+                          type="button"
+                          className={styles.viewBtn}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setMateriaSelecionada(m);
+                          }}
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+
+                      <div className={styles.mobileCatalogName}>{m.nome}</div>
+
+                      {m.prerequisitos && m.prerequisitos.length > 0 && (
+                        <div className={styles.mobilePrereqs}>
+                          {m.prerequisitos.map((pr) => {
+                            const matPr = mapaMaterias.get(pr);
+                            return (
+                              <span
+                                key={pr}
+                                className={styles.prereqTag}
+                                title={matPr ? `${pr} - ${matPr.nome}` : pr}
+                              >
+                                {pr}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
 
             {/* Rodapé da tabela */}

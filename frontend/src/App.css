@@ -2,90 +2,329 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #0b0c0e;
+  color: #f3f4f6;
 }
 
+/* Header Navbar */
 .navbar {
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 0.85rem 1.5rem;
+  background: #111418;
+  border-bottom: 1px solid #1f2329;
+  padding: 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 50;
-}
-
-@media (prefers-color-scheme: dark) {
-  .navbar {
-    background: #111827;
-    border-bottom-color: #1f2937;
-  }
+  backdrop-filter: blur(8px);
 }
 
 .navBrand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   font-weight: 700;
   font-size: 1.15rem;
-  color: inherit;
+  color: #ffffff;
+  user-select: none;
 }
 
 .brandIcon {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   line-height: 1;
 }
 
-.navLinks {
+.brandText {
   display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  flex-direction: column;
 }
 
-.navLink {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #64748b;
-  text-decoration: none;
+.brandTitle {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.brandSubtitle {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1;
+}
+
+.navControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gradeSelectWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gradeSelectLabel {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.gradeSelectInput {
+  background-color: #1a1d23;
+  color: #38bdf8;
+  border: 1px solid #0284c7;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.gradeSelectInput:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* Segmented Tabs */
+.navTabs {
+  display: flex;
+  background-color: #171a20;
+  border: 1px solid #282d36;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.navTabBtn {
+  padding: 0.45rem 0.95rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: transparent;
+  color: #94a3b8;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navTabBtnActive {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.3);
+}
+
+.navTabBtn:hover:not(.navTabBtnActive) {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile responsive Navbar */
+@media (max-width: 640px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .navTopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .brandSubtitle {
+    display: none;
+  }
+
+  .brandTitle {
+    font-size: 1.05rem;
+  }
+
+  .navControls {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .gradeSelectLabel {
+    display: none;
+  }
+
+  .gradeSelectInput {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    max-width: 140px;
+  }
+
+  .navTabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .navTabBtn {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  padding: 1.25rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .mainContent {
+    padding: 0.85rem 0.5rem;
+  }
+}
+
+/* Dashboard Stats Banner */
+.statsBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background-color: #14161a;
+  border: 1px solid #242730;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.statsList {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  align-items: center;
+}
+
+.statItem {
+  color: #9ca3af;
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  transition: color 0.15s;
 }
 
-.navLink:hover {
-  color: #3b82f6;
+.statHighlight {
+  font-weight: 700;
 }
 
-@media (prefers-color-scheme: dark) {
-  .navLink {
-    color: #94a3b8;
+.statDetail {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.btnReset {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #f87171;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btnReset:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+@media (max-width: 640px) {
+  .statsBanner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.65rem 0.85rem;
+    gap: 0.65rem;
   }
-  .navLink:hover {
-    color: #60a5fa;
+
+  .statsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .statItem {
+    flex-direction: column;
+    align-items: flex-start;
+    background: #0d0e11;
+    padding: 0.45rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #1f2228;
+  }
+
+  .btnReset {
+    text-align: center;
+    width: 100%;
+    padding: 0.4rem;
   }
 }
 
-.mainContent {
-  flex: 1;
-  padding: 1.5rem 0.75rem;
+/* Modal Overlay & Card */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-.appFooter {
-  border-top: 1px solid #e2e8f0;
+.modalCard {
+  background-color: #14161a;
+  border: 1px solid #282b33;
+  border-radius: 12px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 1.5rem;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #64748b;
-  background-color: #ffffff;
-  margin-top: auto;
+  color: #ffffff;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  .appFooter {
-    background-color: #111827;
-    border-top-color: #1f2937;
-    color: #94a3b8;
+@media (max-width: 640px) {
+  .modalOverlay {
+    padding: 0.5rem;
+    align-items: flex-end;
   }
+
+  .modalCard {
+    max-height: 85vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* Footer */
+.appFooter {
+  border-top: 1px solid #1f2329;
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #64748b;
+  background-color: #0b0c0e;
+  margin-top: auto;
 }

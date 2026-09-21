@@ -223,6 +223,74 @@ export const EletivasRealizadasTable: React.FC<EletivasRealizadasTableProps> = (
           </tbody>
         </table>
       </div>
+
+      {/* Lista em Cards para Dispositivos Móveis */}
+      <div className={styles.mobileCardsList}>
+        {eletivasFiltradas.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '1.5rem', color: '#9ca3af' }}>
+            Nenhuma disciplina eletiva encontrada.
+          </div>
+        ) : (
+          eletivasFiltradas.map((m) => {
+            const isCursada = cursadas.has(m.codigo);
+            return (
+              <div
+                key={m.codigo}
+                className={`${styles.mobileCard} ${isCursada ? styles.mobileCardCursada : ''}`}
+                onClick={() => handleCheckboxToggle(m)}
+              >
+                <div className={styles.mobileCardTop}>
+                  <div className={styles.mobileCheckArea}>
+                    <input
+                      type="checkbox"
+                      className={styles.checkboxInput}
+                      checked={isCursada}
+                      onChange={() => handleCheckboxToggle(m)}
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`Marcar ${m.codigo} como cursada`}
+                    />
+                    <span className={styles.codigoTag}>{m.codigo}</span>
+                  </div>
+                  <span
+                    className={`${styles.statusBadge} ${
+                      isCursada
+                        ? styles.statusCursada
+                        : m.status === 'disponivel'
+                        ? styles.statusDisponivel
+                        : styles.statusBloqueada
+                    }`}
+                  >
+                    {isCursada ? 'Cursada' : m.status === 'disponivel' ? 'Disponível' : 'Bloqueada'}
+                  </span>
+                </div>
+
+                <div className={styles.mobileCardName}>{m.nome}</div>
+
+                {m.prerequisitos.length > 0 && (
+                  <div className={styles.mobilePrereqs}>
+                    {m.prerequisitos.map((pr) => {
+                      const cumprido = cursadas.has(pr);
+                      const matPr = materiasMap.get(pr);
+                      return (
+                        <span
+                          key={pr}
+                          className={`${styles.prereqBadge} ${
+                            cumprido ? styles.prereqCumprido : styles.prereqFaltante
+                          }`}
+                          title={matPr ? `${pr} - ${matPr.nome}` : pr}
+                        >
+                          {cumprido ? '✓ ' : '✗ '}
+                          {pr}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };

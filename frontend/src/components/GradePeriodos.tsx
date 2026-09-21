@@ -97,6 +97,64 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
     ).length;
   }, [cursadas, materiasMap]);
 
+  const [periodoFiltro, setPeriodoFiltro] = React.useState<number | 'todos'>('todos');
+
+  const renderCard = (materia: MateriaStatus) => {
+    const isCursada = materia.status === 'cursada';
+    const isDisponivel = materia.status === 'disponivel';
+
+    let cardClass = styles.cardBloqueada;
+    if (isCursada) cardClass = styles.cardCursada;
+    else if (isDisponivel) cardClass = styles.cardDisponivel;
+
+    const prereqsTitle = materia.prerequisitos.length > 0
+      ? `Pré-requisitos: ${materia.prerequisitos.join(', ')}`
+      : 'Sem pré-requisitos';
+
+    return (
+      <div
+        key={materia.codigo}
+        className={`${styles.materiaCard} ${cardClass}`}
+        onClick={() => handleCardClick(materia)}
+        onContextMenu={(e) => {
+          if (onSelectMateriaDetalhes) {
+            e.preventDefault();
+            onSelectMateriaDetalhes(materia);
+          }
+        }}
+        title={`${materia.codigo} - ${materia.nome}\n${prereqsTitle}`}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleCardClick(materia);
+          }
+        }}
+      >
+        {onSelectMateriaDetalhes && (
+          <button
+            type="button"
+            className={styles.infoBtn}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectMateriaDetalhes(materia);
+            }}
+            aria-label={`Detalhes de ${materia.codigo}`}
+            title="Ver detalhes da matéria"
+          >
+            i
+          </button>
+        )}
+        <div className={styles.cardCodigo}>
+          {isCursada && <span className={styles.checkIcon}>✓</span>}
+          <span>{materia.codigo}</span>
+        </div>
+        <div className={styles.cardNome}>{materia.nome}</div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.gradeContainer}>
       {/* Barra de Topo padrão GradeUFOP */}
@@ -118,14 +176,14 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
                 onChange={(e) => onMudarGrade(e.target.value as CodigoGrade)}
                 aria-label="Selecionar Grade Curricular"
               >
-                <option value="2024_1">A partir de 2024/1 (Novo)</option>
-                <option value="2023_2">Até 2023/2 (Antigo)</option>
+                <option value="2024_1">2024/1 (Novo)</option>
+                <option value="2023_2">2023/2 (Antigo)</option>
               </select>
             </div>
           )}
 
-          <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
-            {cursadasObrigatorias} de {totalObrigatorias} obrigatórias cursadas ({Math.round((cursadasObrigatorias / totalObrigatorias) * 100)}%)
+          <span className={styles.progressText}>
+            {cursadasObrigatorias} de {totalObrigatorias} obrigatórias ({Math.round((cursadasObrigatorias / totalObrigatorias) * 100)}%)
           </span>
         </div>
       </div>
@@ -135,11 +193,11 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
         <div className={styles.legendList}>
           <div className={styles.legendItem}>
             <span className={`${styles.legendDot} ${styles.dotCursada}`} />
-            <span>Cursada (Clique para remover)</span>
+            <span>Cursada</span>
           </div>
           <div className={styles.legendItem}>
             <span className={`${styles.legendDot} ${styles.dotDisponivel}`} />
-            <span>Disponível para Cursar</span>
+            <span>Disponível</span>
           </div>
           <div className={styles.legendItem}>
             <span className={`${styles.legendDot} ${styles.dotBloqueada}`} />
@@ -162,7 +220,7 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
             onClick={() => marcarPeriodo(3)}
             title="Marca todas as obrigatórias até o 3º período"
           >
-            + Até 3º Período
+            + Até 3º
           </button>
           <button
             type="button"
@@ -170,7 +228,7 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
             onClick={() => marcarPeriodo(5)}
             title="Marca todas as obrigatórias até o 5º período"
           >
-            + Até 5º Período
+            + Até 5º
           </button>
           <button
             type="button"
@@ -179,63 +237,67 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
             style={{ color: '#f87171' }}
             title="Limpar seleção das matérias obrigatórias"
           >
-            Limpar Obrigatórias
+            Limpar
           </button>
         </div>
       </div>
 
-      {/* Grade de 10 Colunas */}
-      <div className={styles.gridScrollWrapper}>
-        <div className={styles.gridColumns}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((periodo) => (
-            <div key={periodo} className={styles.column}>
-              <div className={styles.columnHeader}>{periodo}</div>
-
-              {colunasPeriodos[periodo]?.map((materia) => {
-                const isCursada = materia.status === 'cursada';
-                const isDisponivel = materia.status === 'disponivel';
-
-                let cardClass = styles.cardBloqueada;
-                if (isCursada) cardClass = styles.cardCursada;
-                else if (isDisponivel) cardClass = styles.cardDisponivel;
-
-                const prereqsTitle = materia.prerequisitos.length > 0
-                  ? `Pré-requisitos: ${materia.prerequisitos.join(', ')}`
-                  : 'Sem pré-requisitos';
-
-                return (
-                  <div
-                    key={materia.codigo}
-                    className={`${styles.materiaCard} ${cardClass}`}
-                    onClick={() => handleCardClick(materia)}
-                    onContextMenu={(e) => {
-                      if (onSelectMateriaDetalhes) {
-                        e.preventDefault();
-                        onSelectMateriaDetalhes(materia);
-                      }
-                    }}
-                    title={`${materia.codigo} - ${materia.nome}\n${prereqsTitle}\n(Clique com botão direito para ver detalhes)`}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleCardClick(materia);
-                      }
-                    }}
-                  >
-                    <div className={styles.cardCodigo}>
-                      {isCursada && <span className={styles.checkIcon}>✓</span>}
-                      <span>{materia.codigo}</span>
-                    </div>
-                    <div className={styles.cardNome}>{materia.nome}</div>
-                  </div>
-                );
-              })}
-            </div>
+      {/* Seletor de Período para Mobile */}
+      <div className={styles.periodSelectorBar}>
+        <span className={styles.periodSelectorLabel}>Período:</span>
+        <div className={styles.periodPillsWrapper}>
+          <button
+            type="button"
+            className={`${styles.periodPill} ${periodoFiltro === 'todos' ? styles.periodPillActive : ''}`}
+            onClick={() => setPeriodoFiltro('todos')}
+          >
+            Todos
+          </button>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => (
+            <button
+              key={p}
+              type="button"
+              className={`${styles.periodPill} ${periodoFiltro === p ? styles.periodPillActive : ''}`}
+              onClick={() => setPeriodoFiltro(p)}
+            >
+              {p}º
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Conteúdo: Período Único ou Grade de 10 Colunas */}
+      {periodoFiltro !== 'todos' ? (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+            <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#ffffff' }}>
+              {periodoFiltro}º Período ({colunasPeriodos[periodoFiltro]?.length || 0} matérias)
+            </span>
+            <button
+              type="button"
+              className={styles.quickBtn}
+              onClick={() => setPeriodoFiltro('todos')}
+            >
+              Ver Grade Completa
+            </button>
+          </div>
+          <div className={styles.singlePeriodGrid}>
+            {colunasPeriodos[periodoFiltro]?.map((materia) => renderCard(materia))}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.gridScrollWrapper}>
+          <div className={styles.swipeHint}>← Deslize para navegar pelos períodos →</div>
+          <div className={styles.gridColumns}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((periodo) => (
+              <div key={periodo} className={styles.column}>
+                <div className={styles.columnHeader}>{periodo}</div>
+                {colunasPeriodos[periodo]?.map((materia) => renderCard(materia))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

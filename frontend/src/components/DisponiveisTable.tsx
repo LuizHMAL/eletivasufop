@@ -188,6 +188,58 @@ export const DisponiveisTable: React.FC<DisponiveisTableProps> = ({
           </tbody>
         </table>
       </div>
+
+      {/* Lista em Cards para Dispositivos Móveis */}
+      <div className={styles.mobileCardsList}>
+        {listaFiltrada.length === 0 ? (
+          <div className={styles.emptyState}>
+            Nenhuma disciplina disponível com os filtros atuais. Selecione mais matérias cursadas na Grade para desbloquear novas opções!
+          </div>
+        ) : (
+          listaFiltrada.map((m) => (
+            <div key={m.codigo} className={styles.mobileCard}>
+              <div className={styles.mobileCardTop}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+                  <span className={styles.codigoBadge}>{m.codigo}</span>
+                  {m.obrigatoria ? (
+                    <span className={styles.badgeObrigatoria}>
+                      {m.periodo ? `${m.periodo}º Período` : 'Obrigatória'}
+                    </span>
+                  ) : (
+                    <span className={styles.badgeEletiva}>Eletiva</span>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className={styles.actionBtnMobile}
+                  onClick={() => handleMarcarCursada(m.codigo)}
+                >
+                  + Cursada
+                </button>
+              </div>
+
+              <div className={styles.mobileCardName}>{m.nome}</div>
+
+              {m.prerequisitos.length > 0 && (
+                <div className={styles.mobilePrereqs}>
+                  {m.prerequisitos.map((pr) => {
+                    const matPr = materiasMap.get(pr);
+                    return (
+                      <span
+                        key={pr}
+                        className={styles.prereqCheckTag}
+                        title={matPr ? `${pr} - ${matPr.nome}` : pr}
+                      >
+                        ✓ {pr}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

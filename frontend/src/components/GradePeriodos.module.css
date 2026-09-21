@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #1f2228;
   flex-wrap: wrap;
@@ -25,6 +25,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .courseSelect {
@@ -32,7 +33,7 @@
   color: #ffffff;
   border: 1.5px solid #ffffff;
   padding: 0.45rem 2.2rem 0.45rem 0.85rem;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
@@ -64,7 +65,7 @@
   color: #38bdf8;
   border: 1.5px solid #0284c7;
   padding: 0.45rem 2.2rem 0.45rem 0.85rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
@@ -80,12 +81,17 @@
   outline: 2px solid #38bdf8;
 }
 
+.progressText {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
 /* Quick Actions / Stats */
 .actionBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.85rem;
@@ -94,31 +100,33 @@
 .legendList {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
 .legendItem {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   color: #9ca3af;
+  font-size: 0.82rem;
 }
 
 .legendDot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 3px;
+  flex-shrink: 0;
 }
 
 .dotCursada {
   background-color: #10b981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
 }
 
 .dotDisponivel {
   background-color: #f59e0b;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
 }
 
 .dotBloqueada {
@@ -127,19 +135,21 @@
 
 .quickActions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  align-items: center;
 }
 
 .quickBtn {
   background: #1e2229;
   border: 1px solid #323842;
   color: #cbd5e1;
-  padding: 0.35rem 0.65rem;
+  padding: 0.32rem 0.6rem;
   border-radius: 6px;
   font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .quickBtn:hover {
@@ -148,18 +158,87 @@
   border-color: #4b5563;
 }
 
+/* Mobile Period Selector Bar */
+.periodSelectorBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  padding: 0.4rem 0.6rem;
+  background: #121418;
+  border: 1px solid #1f2228;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.periodSelectorLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.periodPillsWrapper {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2px 0;
+  flex: 1;
+}
+
+.periodPillsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.periodPill {
+  background: #1a1d23;
+  border: 1px solid #2b303c;
+  color: #94a3b8;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.periodPillActive {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+.swipeHint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.6rem;
+}
+
+/* Single Period Grid for Mobile */
+.singlePeriodGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
 /* 10 Columns Grid */
 .gridScrollWrapper {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 0.75rem;
 }
 
 .gridColumns {
   display: grid;
-  grid-template-columns: repeat(10, minmax(110px, 1fr));
+  grid-template-columns: repeat(10, minmax(115px, 1fr));
   gap: 0.6rem;
-  min-width: 1150px;
+  min-width: 1180px;
 }
 
 .column {
@@ -170,7 +249,7 @@
 
 .columnHeader {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
   padding: 0.25rem 0;
@@ -182,15 +261,15 @@
 .materiaCard {
   background-color: #14161a;
   border: 1px solid #282b33;
-  border-radius: 4px;
-  padding: 0.55rem 0.4rem;
+  border-radius: 6px;
+  padding: 0.55rem 0.45rem;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 56px;
+  min-height: 58px;
   transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
@@ -214,10 +293,36 @@
 
 .cardNome {
   font-size: 0.68rem;
-  line-height: 1.15;
+  line-height: 1.2;
   color: #9ca3af;
   text-transform: lowercase;
   word-break: break-word;
+}
+
+/* Info button for touch / mobile */
+.infoBtn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #9ca3af;
+  font-size: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.infoBtn:hover {
+  background: #3b82f6;
+  color: #ffffff;
 }
 
 /* Card States */
@@ -274,27 +379,71 @@
   font-weight: 900;
 }
 
-.statusIndicator {
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-top: 0.25rem;
-  padding: 0.05rem 0.35rem;
-  border-radius: 3px;
-}
+/* Mobile Breakpoints */
+@media (max-width: 768px) {
+  .gradeContainer {
+    padding: 1rem 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
 
-.statusBadgeCursada {
-  background-color: rgba(16, 185, 129, 0.3);
-  color: #6ee7b7;
-}
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
 
-.statusBadgeDisponivel {
-  background-color: rgba(245, 158, 11, 0.3);
-  color: #fcd34d;
-}
+  .courseSelectorWrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
 
-.statusBadgeBloqueada {
-  color: #6b7280;
-}
+  .courseSelect,
+  .gradeSelect {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.4rem 2rem 0.4rem 0.65rem;
+  }
 
+  .gradeSelectorWrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .progressText {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  .actionBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .legendList {
+    justify-content: flex-start;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .quickActions {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    width: 100%;
+  }
+
+  .quickActions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quickBtn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+  }
+}

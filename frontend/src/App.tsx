@@ -198,81 +198,48 @@ export function App() {
     <div className="appContainer">
       {/* Top Navbar */}
       <header className="navbar">
-        <div className="navBrand">
-          <span className="brandIcon" role="img" aria-label="Universidade">🎓</span>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontWeight: 800, fontSize: '1.15rem' }}>Eletivas UFOP</span>
-            <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Engenharia de Computação</span>
+        <div className="navTopRow">
+          <div className="navBrand">
+            <span className="brandIcon" role="img" aria-label="Universidade">🎓</span>
+            <div className="brandText">
+              <span className="brandTitle">Eletivas UFOP</span>
+              <span className="brandSubtitle">Engenharia de Computação</span>
+            </div>
           </div>
-        </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
-          {/* Seletor de Grade Global */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-            <label htmlFor="gradeSelectAppNav" style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 600 }}>
+          <div className="gradeSelectWrapper">
+            <label htmlFor="gradeSelectAppNav" className="gradeSelectLabel">
               Currículo:
             </label>
             <select
               id="gradeSelectAppNav"
+              className="gradeSelectInput"
               value={grade}
               onChange={(e) => handleMudarGrade(e.target.value as CodigoGrade)}
-              style={{
-                backgroundColor: '#1f2937',
-                color: '#38bdf8',
-                border: '1.5px solid #0284c7',
-                borderRadius: '6px',
-                padding: '0.35rem 0.65rem',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
               aria-label="Selecionar Grade Curricular"
             >
-              <option value="2024_1">A partir de 2024/1 (Novo)</option>
-              <option value="2023_2">Até 2023/2 (Antigo)</option>
+              <option value="2024_1">2024/1 (Novo)</option>
+              <option value="2023_2">2023/2 (Antigo)</option>
             </select>
           </div>
+        </div>
 
-          {/* Abas de Navegação Superior */}
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <nav className="navTabs" aria-label="Navegação Principal">
           <button
             type="button"
-            className="navTabBtn"
-            style={{
-              padding: '0.45rem 0.95rem',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 600,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              background: abaPrincipal === 'planejador' ? '#2563eb' : 'transparent',
-              color: abaPrincipal === 'planejador' ? '#ffffff' : '#94a3b8',
-              transition: 'all 0.15s ease',
-            }}
+            className={`navTabBtn ${abaPrincipal === 'planejador' ? 'navTabBtnActive' : ''}`}
             onClick={() => setAbaPrincipal('planejador')}
           >
             Simulador de Matrícula
           </button>
           <button
             type="button"
-            className="navTabBtn"
-            style={{
-              padding: '0.45rem 0.95rem',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 600,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              background: abaPrincipal === 'catalogo' ? '#2563eb' : 'transparent',
-              color: abaPrincipal === 'catalogo' ? '#ffffff' : '#94a3b8',
-              transition: 'all 0.15s ease',
-            }}
+            className={`navTabBtn ${abaPrincipal === 'catalogo' ? 'navTabBtnActive' : ''}`}
             onClick={() => setAbaPrincipal('catalogo')}
           >
-            Catálogo Geral de Disciplinas
+            Catálogo Geral
           </button>
-        </div>
-        </div>
+        </nav>
       </header>
 
       {/* Main Content */}
@@ -308,50 +275,33 @@ export function App() {
         {!loading && !error && abaPrincipal === 'planejador' && (
           <>
             {/* Banner de Estatísticas Resumo */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '1rem',
-                backgroundColor: '#14161a',
-                border: '1px solid #282b33',
-                borderRadius: '10px',
-                padding: '0.85rem 1.25rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', fontSize: '0.9rem' }}>
-                <span style={{ color: '#9ca3af' }}>
-                  Cursadas:{' '}
-                  <strong style={{ color: '#10b981' }}>{estatisticas.totalCursadas}</strong>{' '}
-                  <span style={{ fontSize: '0.8rem' }}>
-                    ({estatisticas.cursadasObrig} obrigatórias + {estatisticas.cursadasElet} eletivas)
+            <div className="statsBanner">
+              <div className="statsList">
+                <div className="statItem">
+                  <span>Cursadas:</span>
+                  <strong className="statHighlight" style={{ color: '#10b981' }}>
+                    {estatisticas.totalCursadas}
+                  </strong>
+                  <span className="statDetail">
+                    ({estatisticas.cursadasObrig} obrig. · {estatisticas.cursadasElet} elet.)
                   </span>
-                </span>
-                <span style={{ color: '#9ca3af' }}>
-                  Disponíveis para Matrícula:{' '}
-                  <strong style={{ color: '#f59e0b' }}>{estatisticas.disponiveisTotal}</strong>{' '}
-                  <span style={{ fontSize: '0.8rem' }}>
-                    ({estatisticas.disponiveisObrig} obrigatórias + {estatisticas.disponiveisElet} eletivas)
+                </div>
+                <div className="statItem">
+                  <span>Disponíveis:</span>
+                  <strong className="statHighlight" style={{ color: '#f59e0b' }}>
+                    {estatisticas.disponiveisTotal}
+                  </strong>
+                  <span className="statDetail">
+                    ({estatisticas.disponiveisObrig} obrig. · {estatisticas.disponiveisElet} elet.)
                   </span>
-                </span>
+                </div>
               </div>
 
               {cursadas.size > 0 && (
                 <button
                   type="button"
                   onClick={() => setCursadas(new Set())}
-                  style={{
-                    background: 'transparent',
-                    border: '1px solid #ef4444',
-                    color: '#f87171',
-                    padding: '0.3rem 0.75rem',
-                    borderRadius: '6px',
-                    fontSize: '0.8rem',
-                    cursor: 'pointer',
-                  }}
+                  className="btnReset"
                 >
                   Reiniciar Seleção
                 </button>
@@ -404,28 +354,9 @@ export function App() {
           <div
             className="modalOverlay"
             onClick={() => setMateriaDetalhes(null)}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              backdropFilter: 'blur(4px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 1000,
-              padding: '1rem',
-            }}
           >
             <div
-              style={{
-                backgroundColor: '#14161a',
-                border: '1px solid #282b33',
-                borderRadius: '12px',
-                maxWidth: '520px',
-                width: '100%',
-                padding: '1.5rem',
-                color: '#ffffff',
-              }}
+              className="modalCard"
               onClick={(e) => e.stopPropagation()}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
