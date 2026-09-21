@@ -81,8 +81,7 @@ export const EletivasRealizadasTable: React.FC<EletivasRealizadasTableProps> = (
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <h2 className={styles.title}>
-            <span>📚</span>
-            <span>Eletivas Realizadas</span>
+            Eletivas Realizadas
           </h2>
           <span className={styles.badgeCount}>
             {eletivasCursadas} de {totalEletivas} eletivas cursadas

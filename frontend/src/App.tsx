@@ -457,9 +457,9 @@ export function App() {
                 <div>
                   <strong>Situação Atual:</strong>{' '}
                   {materiaDetalhes.status === 'cursada' ? (
-                    <span style={{ color: '#34d399' }}>✓ Cursada</span>
+                    <span style={{ color: '#34d399' }}>Cursada</span>
                   ) : materiaDetalhes.status === 'disponivel' ? (
-                    <span style={{ color: '#f59e0b' }}>★ Disponível para Cursar</span>
+                    <span style={{ color: '#f59e0b' }}>Disponível para Cursar</span>
                   ) : (
                     <span style={{ color: '#9ca3af' }}>Bloqueada (faltam pré-requisitos)</span>
                   )}

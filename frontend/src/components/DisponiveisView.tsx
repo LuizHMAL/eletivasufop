@@ -38,9 +38,8 @@ export const DisponiveisView: React.FC<DisponiveisViewProps> = ({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <h2 style={{ fontSize: '1.35rem', fontWeight: 700, margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>🎯</span>
-            <span>Matérias e Eletivas Disponíveis</span>
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 700, margin: 0 }}>
+            Matérias e Eletivas Disponíveis
           </h2>
           <span
             style={{
@@ -82,12 +81,10 @@ export const DisponiveisView: React.FC<DisponiveisViewProps> = ({
               color: modo === 'tabela' ? '#ffffff' : '#9ca3af',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.4rem',
               transition: 'all 0.15s ease',
             }}
           >
-            <span>📋</span>
-            <span>Ver em Tabela</span>
+            Ver em Tabela
           </button>
 
           <button
@@ -104,12 +101,10 @@ export const DisponiveisView: React.FC<DisponiveisViewProps> = ({
               color: modo === 'grafo' ? '#ffffff' : '#9ca3af',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.4rem',
               transition: 'all 0.15s ease',
             }}
           >
-            <span>🕸️</span>
-            <span>Ver em Grafo</span>
+            Ver em Grafo
           </button>
         </div>
       </div>
