@@ -1,0 +1,889 @@
+{
+  "curso": "Engenharia de Computação - UFOP",
+  "disciplinas": {
+    "CEA038": {
+      "nome": "Quimica Geral",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CEA039": {
+      "nome": "Quimica Geral Experimental",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CEA049": {
+      "nome": "Geometria Analitica e Algebra Linear",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CEA050": {
+      "nome": "Calculo Diferencial e Integral I",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CSI101": {
+      "nome": "Programacao de Computadores I",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CSI902": {
+      "nome": "Metodologia de Pesquisa",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CSI903": {
+      "nome": "Introducao a Engenharia de Computacao",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "EAD707": {
+      "nome": "Comunicacao e Expressao",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 1
+    },
+    "CEA051": {
+      "nome": "Calculo Diferencial e Integral II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA050"
+      ],
+      "periodo": 2
+    },
+    "CEA055": {
+      "nome": "Estatistica e Probabilidade",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA050"
+      ],
+      "periodo": 2
+    },
+    "CEA061": {
+      "nome": "Fisica I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA049",
+        "CEA050"
+      ],
+      "periodo": 2
+    },
+    "CSI011": {
+      "nome": "Matematica Discreta",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 2
+    },
+    "CSI102": {
+      "nome": "Programacao de Computadores II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI101"
+      ],
+      "periodo": 2
+    },
+    "CEA052": {
+      "nome": "Calculo Diferencial e Integral III",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA051"
+      ],
+      "periodo": 3
+    },
+    "CEA056": {
+      "nome": "Introducao as Equacoes Diferenciais Ordinarias",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA051"
+      ],
+      "periodo": 3
+    },
+    "CEA062": {
+      "nome": "Fisica II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA061"
+      ],
+      "periodo": 3
+    },
+    "CSI103": {
+      "nome": "Algoritmos e Estruturas de Dados I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI101"
+      ],
+      "periodo": 3
+    },
+    "ELT341": {
+      "nome": "Principios de Eletronica Digital",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI101"
+      ],
+      "periodo": 3
+    },
+    "CEA063": {
+      "nome": "Fisica III",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA049",
+        "CEA061"
+      ],
+      "periodo": 4
+    },
+    "CSI104": {
+      "nome": "Algoritmos e Estruturas de Dados II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI102",
+        "CSI103"
+      ],
+      "periodo": 4
+    },
+    "CSI115": {
+      "nome": "Algoritmos e Estruturas de Dados III",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI011",
+        "CSI103"
+      ],
+      "periodo": 4
+    },
+    "ELT552": {
+      "nome": "Circuitos Eletricos I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA056",
+        "CEA062"
+      ],
+      "periodo": 4
+    },
+    "ELT562": {
+      "nome": "Sinais e Sistemas",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA056"
+      ],
+      "periodo": 4
+    },
+    "CEA064": {
+      "nome": "Fisica IV",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA062",
+        "CEA063"
+      ],
+      "periodo": 5
+    },
+    "CSI012": {
+      "nome": "Analise Numerica",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA049",
+        "CEA056",
+        "CSI101"
+      ],
+      "periodo": 5
+    },
+    "CSI209": {
+      "nome": "Organizacao e Arquitetura de Computadores I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "ELT341"
+      ],
+      "periodo": 5
+    },
+    "CSI412": {
+      "nome": "Engenharia de Software I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI102",
+        "CSI103"
+      ],
+      "periodo": 5
+    },
+    "ELT551": {
+      "nome": "Modelagem e Analise de Sistemas Lineares",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA063",
+        "ELT552"
+      ],
+      "periodo": 5
+    },
+    "CSI210": {
+      "nome": "Organizacao e Arquitetura de Computadores II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI209"
+      ],
+      "periodo": 6
+    },
+    "CSI301": {
+      "nome": "Redes de Computadores I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI101",
+        "CSI209"
+      ],
+      "periodo": 6
+    },
+    "CSI602": {
+      "nome": "Banco de Dados I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI103"
+      ],
+      "periodo": 6
+    },
+    "ELT561": {
+      "nome": "Eletronica I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "ELT552"
+      ],
+      "periodo": 6
+    },
+    "ELT582": {
+      "nome": "Fundamentos de Comunicacoes",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "ELT552",
+        "ELT562"
+      ],
+      "periodo": 6
+    },
+    "CSI106": {
+      "nome": "Fundamentos Teoricos da Computacao",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI115"
+      ],
+      "periodo": 7
+    },
+    "CSI204": {
+      "nome": "Sistemas Operacionais",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI103",
+        "CSI209"
+      ],
+      "periodo": 7
+    },
+    "CSI302": {
+      "nome": "Sistemas Distribuidos",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI301"
+      ],
+      "periodo": 7
+    },
+    "CSI706": {
+      "nome": "Computacao Grafica",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI103"
+      ],
+      "periodo": 7
+    },
+    "ELT580": {
+      "nome": "Microprocessadores e Microcontroladores",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI209",
+        "ELT561"
+      ],
+      "periodo": 7
+    },
+    "CSI114": {
+      "nome": "Linguagens de Programacao",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI106"
+      ],
+      "periodo": 8
+    },
+    "CSI206": {
+      "nome": "Avaliacao de Desempenho de Sistemas",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI302"
+      ],
+      "periodo": 8
+    },
+    "CSI522": {
+      "nome": "Interacao Humano Computador",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": 8
+    },
+    "CSI701": {
+      "nome": "Inteligencia Artificial",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI115"
+      ],
+      "periodo": 8
+    },
+    "CSI990": {
+      "nome": "Projeto Integrador I",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 8
+    },
+    "CEA066": {
+      "nome": "Fundamentos de Ciencia do Ambiente",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CEA038",
+        "CEA039"
+      ],
+      "periodo": 10
+    },
+    "CSI109": {
+      "nome": "Compiladores I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI106"
+      ],
+      "periodo": 9
+    },
+    "CSI901": {
+      "nome": "Informatica e Sociedade",
+      "obrigatoria": true,
+      "prerequisitos": [],
+      "periodo": 9
+    },
+    "CSI991": {
+      "nome": "Projeto Integrador II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI990"
+      ],
+      "periodo": 9
+    },
+    "CSI995": {
+      "nome": "TCC I",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI902"
+      ],
+      "periodo": 9
+    },
+    "CSI996": {
+      "nome": "TCC II",
+      "obrigatoria": true,
+      "prerequisitos": [
+        "CSI995"
+      ],
+      "periodo": 10
+    },
+    "CEA076": {
+      "nome": "Introdução à Libras",
+      "obrigatoria": false,
+      "prerequisitos": [],
+      "periodo": null
+    },
+    "CEA040": {
+      "nome": "Estrutura e Dinamica de Redes Complexas",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CEA050",
+        "CEA055"
+      ],
+      "periodo": null
+    },
+    "CEA041": {
+      "nome": "Exploracao e Visualizacao de Dados",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA055",
+        "CSI101"
+      ],
+      "periodo": null
+    },
+    "CEA042": {
+      "nome": "Algebra e Aplicacoes",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CEA050"
+      ],
+      "periodo": null
+    },
+    "CEA043": {
+      "nome": "Aplicacoes de Algebra Linear",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CEA050"
+      ],
+      "periodo": null
+    },
+    "CEA044": {
+      "nome": "Introducao aos Sistemas Dinamicos",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA056"
+      ],
+      "periodo": null
+    },
+    "CEA045": {
+      "nome": "Redes Bayesianas",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CEA050"
+      ],
+      "periodo": null
+    },
+    "CSI207": {
+      "nome": "Robotica",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI101",
+        "CSI209"
+      ],
+      "periodo": null
+    },
+    "CSI208": {
+      "nome": "Linguagens de Descricao de Hardware",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI101",
+        "CSI209"
+      ],
+      "periodo": null
+    },
+    "CSI304": {
+      "nome": "Redes de Computadores II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI301"
+      ],
+      "periodo": null
+    },
+    "CSI305": {
+      "nome": "Internet das Coisas",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI301"
+      ],
+      "periodo": null
+    },
+    "CSI306": {
+      "nome": "Computacao Movel",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI301"
+      ],
+      "periodo": null
+    },
+    "CSI405": {
+      "nome": "Gerencia de Projetos de Software",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI406": {
+      "nome": "Desenvolvimento Agil de Software",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI408": {
+      "nome": "Teste de Software",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI410": {
+      "nome": "Engenharia de Software II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI411": {
+      "nome": "Qualidade de Software",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI603": {
+      "nome": "Banco de Dados II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI104",
+        "CSI602"
+      ],
+      "periodo": null
+    },
+    "CSI605": {
+      "nome": "Sistemas de Apoio a Decisao",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI602"
+      ],
+      "periodo": null
+    },
+    "CSI606": {
+      "nome": "Sistemas Web I",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI602",
+        "CSI603"
+      ],
+      "periodo": null
+    },
+    "CSI607": {
+      "nome": "Sistemas Web II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI606"
+      ],
+      "periodo": null
+    },
+    "CSI608": {
+      "nome": "Programacao para Dispositivos Moveis",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI412"
+      ],
+      "periodo": null
+    },
+    "CSI609": {
+      "nome": "Analise de Midias Sociais",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI115"
+      ],
+      "periodo": null
+    },
+    "CSI702": {
+      "nome": "Inteligencia Computacional para Otimizacao",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI115",
+        "CSI701"
+      ],
+      "periodo": null
+    },
+    "CSI703": {
+      "nome": "Computacao Evolucionaria",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI115",
+        "CSI701"
+      ],
+      "periodo": null
+    },
+    "CSI704": {
+      "nome": "Aprendizagem de Maquina",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI701"
+      ],
+      "periodo": null
+    },
+    "CSI705": {
+      "nome": "Aprendizagem Profunda",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI701"
+      ],
+      "periodo": null
+    },
+    "CSI707": {
+      "nome": "Processamento Digital de Imagens",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI101",
+        "CSI103"
+      ],
+      "periodo": null
+    },
+    "CSI708": {
+      "nome": "Visao Computacional",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CSI101"
+      ],
+      "periodo": null
+    },
+    "CSI709": {
+      "nome": "Engenharia Ontologica e Logica Fuzzy",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI114",
+        "CSI701"
+      ],
+      "periodo": null
+    },
+    "CSI710": {
+      "nome": "Projeto e Analise de Experimentos",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA055"
+      ],
+      "periodo": null
+    },
+    "CSI711": {
+      "nome": "Mineracao de Dados",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI602"
+      ],
+      "periodo": null
+    },
+    "CSI803": {
+      "nome": "Banco de Dados Geograficos",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI602"
+      ],
+      "periodo": null
+    },
+    "CSI804": {
+      "nome": "Geoprocessamento e Sistemas de Informacao Geografica",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI602"
+      ],
+      "periodo": null
+    },
+    "CSI805": {
+      "nome": "Modelagem e Simulacao de Sistemas Terrestres",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI102",
+        "CSI103"
+      ],
+      "periodo": null
+    },
+    "CSI806": {
+      "nome": "Computacao Vestivel",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CSI209"
+      ],
+      "periodo": null
+    },
+    "ELT026": {
+      "nome": "Desenho Computacional",
+      "obrigatoria": false,
+      "prerequisitos": [],
+      "periodo": null
+    },
+    "ELT106": {
+      "nome": "Laboratorio de Eletronica II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT551",
+        "ELT561"
+      ],
+      "periodo": null
+    },
+    "ELT107": {
+      "nome": "Laboratorio de Instrumentacao",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT106",
+        "ELT570",
+        "ELT571"
+      ],
+      "periodo": null
+    },
+    "ELT147": {
+      "nome": "Eletronica Embarcada",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT580"
+      ],
+      "periodo": null
+    },
+    "ELT453": {
+      "nome": "Sistemas Multimidia",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT502": {
+      "nome": "Eletromagnetismo",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA052",
+        "ELT552"
+      ],
+      "periodo": null
+    },
+    "ELT563": {
+      "nome": "Circuitos Eletricos II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT552"
+      ],
+      "periodo": null
+    },
+    "ELT570": {
+      "nome": "Sistemas de Controle I",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT551",
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT571": {
+      "nome": "Eletronica II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT551",
+        "ELT561"
+      ],
+      "periodo": null
+    },
+    "ELT572": {
+      "nome": "Instrumentacao",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT106",
+        "ELT570",
+        "ELT571"
+      ],
+      "periodo": null
+    },
+    "ELT671": {
+      "nome": "Processamento Digital de Sinais",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT708": {
+      "nome": "Principios das Comunicacoes Digitais",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT709": {
+      "nome": "Propagacao de Ondas de Radio",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT502",
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT710": {
+      "nome": "Probabilidade e Processos Estocasticos para Engenharia",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA052",
+        "CEA055"
+      ],
+      "periodo": null
+    },
+    "ELT712": {
+      "nome": "Topicos Especiais em Telecomunicacoes",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT741": {
+      "nome": "Topicos Especiais em Telecomunicacoes I",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT502"
+      ],
+      "periodo": null
+    },
+    "ELT742": {
+      "nome": "Topicos Especiais em Telecomunicacoes II",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT743": {
+      "nome": "Topicos Especiais em Telecomunicacoes III",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT744": {
+      "nome": "Topicos Especiais em Telecomunicacoes IV",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT562"
+      ],
+      "periodo": null
+    },
+    "ELT745": {
+      "nome": "Linhas de Transmissao e Radiacao",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ELT502"
+      ],
+      "periodo": null
+    },
+    "ENP007": {
+      "nome": "Laboratorio de Otimizacao Combinatoria",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "ENP012"
+      ],
+      "periodo": null
+    },
+    "ENP012": {
+      "nome": "Programacao Linear e Inteira",
+      "obrigatoria": false,
+      "prerequisitos": [
+        "CEA049",
+        "CSI103"
+      ],
+      "periodo": null
+    },
+    "ENP043": {
+      "nome": "Etica e Responsabilidade Socioambiental",
+      "obrigatoria": false,
+      "prerequisitos": [],
+      "periodo": null
+    },
+    "ENP045": {
+      "nome": "Ciencia Tecnologia e Sociedade",
+      "obrigatoria": false,
+      "prerequisitos": [],
+      "periodo": null
+    }
+  }
+}

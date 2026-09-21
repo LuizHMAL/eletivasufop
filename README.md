@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# Eletivas UFOP - Monorepo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de gerenciamento e visualização de disciplinas obrigatórias e eletivas do curso de Engenharia de Computação / Ciência da Computação — UFOP.
 
-Currently, two official plugins are available:
+## Estrutura do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+eletivasufop/
+├── frontend/             # Frontend em React 19 + TypeScript + Vite
+│   ├── src/
+│   │   ├── components/   # MateriasTable, estilos, etc.
+│   │   ├── App.tsx       # Layout principal
+│   │   └── main.tsx
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── eletivasbknd/         # Backend em FastAPI (Python 3.13 + uv)
+│   ├── src/
+│   │   ├── components/   # Lógica de matérias e pré-requisitos
+│   │   ├── data/         # Base de matérias (materias.json)
+│   │   ├── model/        # Schemas Pydantic
+│   │   ├── routes/       # Rotas REST da API
+│   │   └── main.py       # Ponto de entrada FastAPI com CORS
+│   └── pyproject.toml
+│
+├── package.json          # Orquestrador unificado (scripts simultâneos)
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Pré-requisitos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Node.js** (v18+)
+- **uv** (gerenciador de pacotes Python)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Instalação
+
+```bash
+# Instala dependências do monorepo e do frontend
+npm install
+
+# Instala/sincroniza o backend Python
+npm run install:all
+```
+
+## Como Executar
+
+### 1. Iniciar Frontend e Backend Juntos (Recomendado)
+
+```bash
+npm run dev
+```
+
+- **Frontend (React + Vite)**: [http://localhost:5173](http://localhost:5173)
+- **Backend (FastAPI)**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **Documentação Swagger da API**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+### 2. Iniciar Serviços Individualmente
+
+```bash
+# Apenas o Backend:
+npm run dev:backend
+
+# Apenas o Frontend:
+npm run dev:frontend
+```
+
+### 3. Build do Frontend
+
+```bash
+npm run build
 ```
