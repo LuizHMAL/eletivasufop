@@ -54,7 +54,7 @@ export function MateriasTable() {
         setMaterias(fallbackResponse.data.materias || []);
       } catch (fallbackErr) {
         console.error('Falha também no endpoint /materias/todas:', fallbackErr);
-        setError('Não foi possível carregar as matérias. Certifique-se de que o backend está ativo em http://127.0.0.1:8000.');
+        setError('Não foi possível carregar as disciplinas. Tente recarregar a página.');
       }
     } finally {
       setLoading(false);

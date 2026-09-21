@@ -46,7 +46,7 @@ export function App() {
       setMaterias(res.data.materias || []);
     } catch (err) {
       console.error('Erro ao carregar matérias:', err);
-      setError('Não foi possível carregar as matérias da API. Verifique se o backend FastAPI está ativo.');
+      setError('Não foi possível carregar as disciplinas. Tente recarregar a página.');
     } finally {
       setLoading(false);
     }
@@ -444,7 +444,7 @@ export function App() {
       </main>
 
       <footer className="appFooter">
-        <p>Eletivas UFOP — Sistema de Planejamento de Matrícula (FastAPI + React TypeScript)</p>
+        <p>Eletivas UFOP — Sistema de Planejamento de Matrícula</p>
       </footer>
     </div>
   );

@@ -13,3 +13,4 @@ try:
     from eletivasbknd.src.main import app
 except ImportError:
     from src.main import app
+
