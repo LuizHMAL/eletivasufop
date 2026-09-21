@@ -1,48 +1,81 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import './App.css';
-import type { Materia, MateriaStatus } from './types/materia';
+import type { Materia, MateriaStatus, CodigoGrade } from './types/materia';
 import { GradePeriodos } from './components/GradePeriodos';
 import { EletivasRealizadasTable } from './components/EletivasRealizadasTable';
 import { DisponiveisView } from './components/DisponiveisView';
 import { MateriasTable } from './components/MateriasTable';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
-const STORAGE_KEY = 'eletivasufop_cursadas';
+
+const getStorageKey = (g: CodigoGrade) => `eletivasufop_cursadas_${g}`;
+
+const carregarCursadasSalvas = (g: CodigoGrade): Set<string> => {
+  try {
+    const key = getStorageKey(g);
+    const salvo = localStorage.getItem(key);
+    if (salvo) {
+      const parsed = JSON.parse(salvo);
+      if (Array.isArray(parsed)) {
+        return new Set<string>(parsed);
+      }
+    }
+    // Migração de chave legada apenas se for 2024_1
+    if (g === '2024_1') {
+      const legadokey = localStorage.getItem('eletivasufop_cursadas');
+      if (legadokey) {
+        const parsed = JSON.parse(legadokey);
+        if (Array.isArray(parsed)) {
+          return new Set<string>(parsed);
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Erro ao ler cursadas do localStorage:', e);
+  }
+  return new Set<string>();
+};
 
 export function App() {
   const [materias, setMaterias] = useState<Materia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Conjunto de matérias cursadas (inicializado com localStorage)
-  const [cursadas, setCursadas] = useState<Set<string>>(() => {
+  // Grade selecionada: '2024_1' (novo) ou '2023_2' (antigo)
+  const [grade, setGrade] = useState<CodigoGrade>(() => {
     try {
-      const salvo = localStorage.getItem(STORAGE_KEY);
-      if (salvo) {
-        const parsed = JSON.parse(salvo);
-        if (Array.isArray(parsed)) {
-          return new Set<string>(parsed);
-        }
+      const salvo = localStorage.getItem('eletivasufop_grade');
+      if (salvo === '2023_2' || salvo === '2024_1') {
+        return salvo;
       }
     } catch (e) {
-      console.error('Erro ao ler localStorage:', e);
+      console.error('Erro ao ler grade do localStorage:', e);
     }
-    return new Set<string>();
+    return '2024_1';
+  });
+
+  // Conjunto de matérias cursadas (específico por grade)
+  const [cursadas, setCursadas] = useState<Set<string>>(() => {
+    const savedGrade = (localStorage.getItem('eletivasufop_grade') as CodigoGrade) || '2024_1';
+    return carregarCursadasSalvas(savedGrade);
   });
 
   // Modal de detalhes
   const [materiaDetalhes, setMateriaDetalhes] = useState<MateriaStatus | null>(null);
 
-  // Aba ativa principal: 'planejador' (GradeUFOP + Eletivas + Disponíveis) vs 'grade_completa' (Tabela geral)
+  // Aba ativa principal: 'planejador' (GradeUFOP + Eletivas + Disponíveis) vs 'catalogo' (Tabela geral)
   const [abaPrincipal, setAbaPrincipal] = useState<'planejador' | 'catalogo'>('planejador');
 
-  // Carregar dados iniciais da API
-  const carregarMaterias = useCallback(async () => {
+  // Carregar dados da API
+  const carregarMaterias = useCallback(async (gradeParam?: CodigoGrade) => {
+    const g = gradeParam || grade;
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get<{ materias: Materia[] }>(`${API_BASE_URL}/materias`);
+      const res = await axios.get<{ materias: Materia[] }>(`${API_BASE_URL}/materias`, {
+        params: { grade: g },
+      });
       setMaterias(res.data.materias || []);
     } catch (err) {
       console.error('Erro ao carregar matérias:', err);
@@ -50,20 +83,35 @@ export function App() {
     } finally {
       setLoading(false);
     }
+  }, [grade]);
+
+  useEffect(() => {
+    carregarMaterias(grade);
   }, []);
 
-  useEffect(() => {
-    carregarMaterias();
-  }, [carregarMaterias]);
-
-  // Persistir matérias cursadas no localStorage
-  useEffect(() => {
+  // Mudança de grade com persistência e atualização imediata
+  const handleMudarGrade = (novaGrade: CodigoGrade) => {
+    if (novaGrade === grade) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(cursadas)));
+      localStorage.setItem(getStorageKey(grade), JSON.stringify(Array.from(cursadas)));
+      localStorage.setItem('eletivasufop_grade', novaGrade);
     } catch (e) {
       console.error('Erro ao salvar no localStorage:', e);
     }
-  }, [cursadas]);
+    const novasCursadas = carregarCursadasSalvas(novaGrade);
+    setGrade(novaGrade);
+    setCursadas(novasCursadas);
+    carregarMaterias(novaGrade);
+  };
+
+  // Persistir matérias cursadas no localStorage para a grade ativa
+  useEffect(() => {
+    try {
+      localStorage.setItem(getStorageKey(grade), JSON.stringify(Array.from(cursadas)));
+    } catch (e) {
+      console.error('Erro ao salvar no localStorage:', e);
+    }
+  }, [cursadas, grade]);
 
   // Mapa rápido de matérias por código
   const materiasMap = useMemo(() => {
@@ -107,12 +155,13 @@ export function App() {
     axios
       .post(`${API_BASE_URL}/materias/disponiveis`, {
         cursadas: Array.from(cursadas),
+        grade,
         auto_incluir_prerequisitos: false,
       })
       .catch((err) => {
         console.warn('Sync com backend /materias/disponiveis:', err);
       });
-  }, [cursadas, materias.length]);
+  }, [cursadas, materias.length, grade]);
 
   // Estatísticas globais
   const estatisticas = useMemo(() => {
@@ -157,8 +206,35 @@ export function App() {
           </div>
         </div>
 
-        {/* Abas de Navegação Superior */}
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+          {/* Seletor de Grade Global */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <label htmlFor="gradeSelectAppNav" style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 600 }}>
+              Currículo:
+            </label>
+            <select
+              id="gradeSelectAppNav"
+              value={grade}
+              onChange={(e) => handleMudarGrade(e.target.value as CodigoGrade)}
+              style={{
+                backgroundColor: '#1f2937',
+                color: '#38bdf8',
+                border: '1.5px solid #0284c7',
+                borderRadius: '6px',
+                padding: '0.35rem 0.65rem',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+              aria-label="Selecionar Grade Curricular"
+            >
+              <option value="2024_1">A partir de 2024/1 (Novo)</option>
+              <option value="2023_2">Até 2023/2 (Antigo)</option>
+            </select>
+          </div>
+
+          {/* Abas de Navegação Superior */}
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
           <button
             type="button"
             className="navTabBtn"
@@ -196,6 +272,7 @@ export function App() {
             Catálogo Geral de Disciplinas
           </button>
         </div>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -212,7 +289,7 @@ export function App() {
             <p><strong>Erro:</strong> {error}</p>
             <button
               type="button"
-              onClick={carregarMaterias}
+              onClick={() => carregarMaterias()}
               style={{
                 marginTop: '1rem',
                 padding: '0.5rem 1.25rem',
@@ -289,6 +366,8 @@ export function App() {
                 cursadas={cursadas}
                 onToggleMateria={handleToggleMateria}
                 onSelectMateriaDetalhes={(m) => setMateriaDetalhes(m)}
+                grade={grade}
+                onMudarGrade={handleMudarGrade}
               />
             </section>
 
@@ -316,7 +395,7 @@ export function App() {
 
         {!loading && !error && abaPrincipal === 'catalogo' && (
           <section>
-            <MateriasTable />
+            <MateriasTable grade={grade} onMudarGrade={handleMudarGrade} />
           </section>
         )}
 

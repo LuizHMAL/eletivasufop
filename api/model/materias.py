@@ -46,6 +46,7 @@ class MateriaStatus(BaseModel):
 class DisponiveisRequest(BaseModel):
     cursadas: list[str] = []
     auto_incluir_prerequisitos: bool = True
+    grade: Optional[str] = "2024_1"
 
 
 class DisponiveisResponse(BaseModel):
@@ -58,3 +59,18 @@ class DisponiveisResponse(BaseModel):
     total_cursadas: int
     total_obrigatorias_disponiveis: int
     total_eletivas_disponiveis: int
+    grade: Optional[str] = "2024_1"
+
+
+class GradeInfo(BaseModel):
+    id: str
+    nome: str
+    subtitulo: str
+    total_materias: int
+    total_obrigatorias: int
+    total_eletivas: int
+
+
+class GradesResponse(BaseModel):
+    grades: list[GradeInfo]
+    grade_padrao: str = "2024_1"

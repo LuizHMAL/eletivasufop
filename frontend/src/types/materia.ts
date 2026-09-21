@@ -1,3 +1,14 @@
+export type CodigoGrade = '2023_2' | '2024_1';
+
+export interface GradeInfo {
+  id: CodigoGrade;
+  nome: string;
+  subtitulo: string;
+  total_materias: number;
+  total_obrigatorias: number;
+  total_eletivas: number;
+}
+
 export interface Materia {
   codigo: string;
   nome: string;
@@ -19,10 +30,8 @@ export interface DisponiveisResponse {
   obrigatorias_bloqueadas: MateriaStatus[];
   eletivas_bloqueadas: MateriaStatus[];
   todas_materias: MateriaStatus[];
-  total_cursadas: int;
-  total_obrigatorias_disponiveis: int;
-  total_eletivas_disponiveis: int;
+  total_cursadas: number;
+  total_obrigatorias_disponiveis: number;
+  total_eletivas_disponiveis: number;
+  grade?: string;
 }
-
-export type int = number;
-
