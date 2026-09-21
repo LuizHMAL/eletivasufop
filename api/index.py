@@ -5,13 +5,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 CURRENT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = CURRENT_DIR.parent
-BACKEND_DIR = ROOT_DIR / "eletivasbknd"
 
-for p in [str(ROOT_DIR), str(BACKEND_DIR), str(BACKEND_DIR / "src")]:
+for p in [str(ROOT_DIR), str(CURRENT_DIR)]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
-from src.routes.materia_route import router as materias_router
+try:
+    from routes.materia_route import router as materias_router
+except ImportError:
+    from api.routes.materia_route import router as materias_router
 
 # Instância explícita de FastAPI no nível superior do módulo (exigência do Vercel CLI)
 # Desabilita docs_url, redoc_url e openapi_url conforme requisitado

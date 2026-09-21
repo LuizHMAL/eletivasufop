@@ -1,16 +1,29 @@
 from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
-from src.components.materias_component import (
-    get_materias,
-    get_materia,
-    calcular_disponibilidade
-)
-from src.model.materias import (
-    MateriasResponse,
-    MateriaSimpleSelectResponse,
-    DisponiveisRequest,
-    DisponiveisResponse
-)
+try:
+    from components.materias_component import (
+        get_materias,
+        get_materia,
+        calcular_disponibilidade
+    )
+    from model.materias import (
+        MateriasResponse,
+        MateriaSimpleSelectResponse,
+        DisponiveisRequest,
+        DisponiveisResponse
+    )
+except ImportError:
+    from api.components.materias_component import (
+        get_materias,
+        get_materia,
+        calcular_disponibilidade
+    )
+    from api.model.materias import (
+        MateriasResponse,
+        MateriaSimpleSelectResponse,
+        DisponiveisRequest,
+        DisponiveisResponse
+    )
 
 router = APIRouter()
 

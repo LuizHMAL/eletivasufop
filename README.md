@@ -8,22 +8,23 @@ Sistema de gerenciamento e visualização de disciplinas obrigatórias e eletiva
 eletivasufop/
 ├── frontend/             # Frontend em React 19 + TypeScript + Vite
 │   ├── src/
-│   │   ├── components/   # MateriasTable, estilos, etc.
-│   │   ├── App.tsx       # Layout principal
+│   │   ├── components/   # GradePeriodos, EletivasRealizadas, DisponiveisView, Grafo, etc.
+│   │   ├── App.tsx       # Layout e lógica principal
 │   │   └── main.tsx
 │   ├── index.html
 │   ├── package.json
 │   └── vite.config.ts
 │
-├── eletivasbknd/         # Backend em FastAPI (Python 3.13 + uv)
-│   ├── src/
-│   │   ├── components/   # Lógica de matérias e pré-requisitos
-│   │   ├── data/         # Base de matérias (materias.json)
-│   │   ├── model/        # Schemas Pydantic
-│   │   ├── routes/       # Rotas REST da API
-│   │   └── main.py       # Ponto de entrada FastAPI com CORS
+├── api/                  # Backend em FastAPI (Python 3.13 + uv) & Serverless Vercel
+│   ├── components/       # Lógica de matérias e expansão de pré-requisitos
+│   ├── data/             # Base de matérias (materias.json)
+│   ├── model/            # Schemas Pydantic
+│   ├── routes/           # Rotas REST da API
+│   ├── tests/            # Testes com Pytest
+│   ├── index.py          # Ponto de entrada FastAPI com CORS e handlers
 │   └── pyproject.toml
 │
+├── vercel.json           # Configuração de deploy unificado na Vercel
 ├── package.json          # Orquestrador unificado (scripts simultâneos)
 └── README.md
 ```
@@ -53,7 +54,6 @@ npm run dev
 
 - **Frontend (React + Vite)**: [http://localhost:5173](http://localhost:5173)
 - **Backend (FastAPI)**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- **Documentação Swagger da API**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ### 2. Iniciar Serviços Individualmente
 
@@ -65,7 +65,14 @@ npm run dev:backend
 npm run dev:frontend
 ```
 
-### 3. Build do Frontend
+### 3. Testes
+
+```bash
+# Testes do backend (Pytest):
+npm run test:backend
+```
+
+### 4. Build do Frontend
 
 ```bash
 npm run build

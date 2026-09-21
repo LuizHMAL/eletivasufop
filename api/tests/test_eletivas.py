@@ -1,11 +1,19 @@
 import pytest
 from fastapi.testclient import TestClient
-from src.main import app
-from src.components.materias_component import (
-    get_materias,
-    expandir_prerequisitos,
-    calcular_disponibilidade
-)
+try:
+    from index import app
+    from components.materias_component import (
+        get_materias,
+        expandir_prerequisitos,
+        calcular_disponibilidade
+    )
+except ImportError:
+    from api.index import app
+    from api.components.materias_component import (
+        get_materias,
+        expandir_prerequisitos,
+        calcular_disponibilidade
+    )
 
 client = TestClient(app)
 

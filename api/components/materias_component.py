@@ -1,11 +1,18 @@
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Set
-from src.model.materias import (
-    Materia,
-    MateriaStatus,
-    DisponiveisResponse
-)
+try:
+    from model.materias import (
+        Materia,
+        MateriaStatus,
+        DisponiveisResponse
+    )
+except ImportError:
+    from api.model.materias import (
+        Materia,
+        MateriaStatus,
+        DisponiveisResponse
+    )
 
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "materias.json"
 
