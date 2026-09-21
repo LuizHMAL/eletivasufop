@@ -212,6 +212,7 @@
 }
 
 .swipeHint {
+  display: none;
   text-align: center;
   font-size: 0.75rem;
   color: #64748b;
@@ -445,5 +446,9 @@
   .quickBtn {
     padding: 0.35rem 0.65rem;
     font-size: 0.75rem;
+  }
+
+  .swipeHint {
+    display: block;
   }
 }
