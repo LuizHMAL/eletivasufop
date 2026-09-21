@@ -222,7 +222,7 @@ export const DisponiveisGrafo: React.FC<DisponiveisGrafoProps> = ({
             className={`${styles.filterBtn} ${filtro === 'todas' ? styles.filterBtnActive : ''}`}
             onClick={() => setFiltro('todas')}
           >
-            Grade Completa (109 matérias)
+            Grade Completa ({materiasMap.size} disciplinas)
           </button>
         </div>
 

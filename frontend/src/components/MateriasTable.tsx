@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import axios from 'axios';
 import styles from './MateriasTable.module.css';
+import type { CodigoGrade } from '../types/materia';
 
 export interface Materia {
   codigo: string;
@@ -11,6 +12,11 @@ export interface Materia {
 
 interface MateriasResponse {
   materias: Materia[];
+}
+
+export interface MateriasTableProps {
+  grade?: CodigoGrade;
+  onMudarGrade?: (novaGrade: CodigoGrade) => void;
 }
 
 export type TipoFiltro = 'todas' | 'obrigatorias' | 'eletivas';
@@ -25,7 +31,7 @@ function normalizarTexto(str: string): string {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
-export function MateriasTable() {
+export function MateriasTable({ grade = '2024_1', onMudarGrade }: MateriasTableProps) {
   const [materias, setMaterias] = useState<Materia[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,13 +50,17 @@ export function MateriasTable() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get<MateriasResponse>(`${API_BASE_URL}/materias`);
+      const response = await axios.get<MateriasResponse>(`${API_BASE_URL}/materias`, {
+        params: { grade }
+      });
       setMaterias(response.data.materias || []);
     } catch (err) {
       console.error('Erro ao buscar matérias:', err);
       // Tenta rota alternativa caso a primeira falhe
       try {
-        const fallbackResponse = await axios.get<MateriasResponse>(`${API_BASE_URL}/materias/todas`);
+        const fallbackResponse = await axios.get<MateriasResponse>(`${API_BASE_URL}/materias/todas`, {
+          params: { grade }
+        });
         setMaterias(fallbackResponse.data.materias || []);
       } catch (fallbackErr) {
         console.error('Falha também no endpoint /materias/todas:', fallbackErr);
@@ -59,7 +69,7 @@ export function MateriasTable() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [grade]);
 
   useEffect(() => {
     carregarMaterias();
@@ -146,20 +156,46 @@ export function MateriasTable() {
           <div>
             <h1 className={styles.mainTitle}>Grade Curricular de Matérias</h1>
             <p className={styles.subtitle}>
-              Engenharia de Computação / Ciência da Computação — UFOP
+              Engenharia de Computação — UFOP ({grade === '2023_2' ? 'Currículo até 2023/2' : 'Currículo a partir de 2024/1'})
             </p>
           </div>
 
-          <div className={styles.statsBar}>
-            <span className={styles.statBadge}>
-              Total de Disciplinas: {contadores.total}
-            </span>
-            <span className={styles.statBadge}>
-              Obrigatórias: {contadores.obrigatorias}
-            </span>
-            <span className={styles.statBadge}>
-              Eletivas: {contadores.eletivas}
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            {onMudarGrade && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.85rem', color: '#9ca3af', fontWeight: 600 }}>Grade:</span>
+                <select
+                  value={grade}
+                  onChange={(e) => onMudarGrade(e.target.value as CodigoGrade)}
+                  style={{
+                    backgroundColor: '#14161a',
+                    color: '#38bdf8',
+                    border: '1px solid #0284c7',
+                    borderRadius: '6px',
+                    padding: '0.35rem 0.65rem',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                  aria-label="Selecionar Grade"
+                >
+                  <option value="2024_1">A partir de 2024/1 (Novo)</option>
+                  <option value="2023_2">Até 2023/2 (Antigo)</option>
+                </select>
+              </div>
+            )}
+
+            <div className={styles.statsBar}>
+              <span className={styles.statBadge}>
+                Total de Disciplinas: {contadores.total}
+              </span>
+              <span className={styles.statBadge}>
+                Obrigatórias: {contadores.obrigatorias}
+              </span>
+              <span className={styles.statBadge}>
+                Eletivas: {contadores.eletivas}
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -170,7 +206,21 @@ export function MateriasTable() {
         <div className={styles.controlsBar}>
           {/* Campo de Busca */}
           <div className={styles.searchContainer}>
-            <span className={styles.searchIcon} aria-hidden="true">🔍</span>
+            <svg
+              className={styles.searchIcon}
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
             <input
               type="text"
               placeholder="Buscar por código ou nome (ex: CSI101, Cálculo)..."

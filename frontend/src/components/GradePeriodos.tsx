@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import type { Materia, MateriaStatus } from '../types/materia';
+import type { Materia, MateriaStatus, CodigoGrade } from '../types/materia';
 import { expandPrerequisites, removeDependentSubjects } from '../utils/materiaGraph';
 import styles from './GradePeriodos.module.css';
 
@@ -9,6 +9,8 @@ interface GradePeriodosProps {
   cursadas: Set<string>;
   onToggleMateria: (novoSet: Set<string>) => void;
   onSelectMateriaDetalhes?: (materia: MateriaStatus) => void;
+  grade?: CodigoGrade;
+  onMudarGrade?: (novaGrade: CodigoGrade) => void;
 }
 
 export const GradePeriodos: React.FC<GradePeriodosProps> = ({
@@ -17,6 +19,8 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
   cursadas,
   onToggleMateria,
   onSelectMateriaDetalhes,
+  grade = '2024_1',
+  onMudarGrade,
 }) => {
   // Agrupar matérias obrigatórias por período (1 a 10)
   const colunasPeriodos = useMemo(() => {
@@ -79,10 +83,19 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
     onToggleMateria(novoSet);
   };
 
-  const totalObrigatorias = 49;
-  const cursadasObrigatorias = Array.from(cursadas).filter(
-    (c) => materiasMap.get(c)?.obrigatoria
-  ).length;
+  const totalObrigatorias = useMemo(() => {
+    let count = 0;
+    materiasMap.forEach((m) => {
+      if (m.obrigatoria) count++;
+    });
+    return count || 1;
+  }, [materiasMap]);
+
+  const cursadasObrigatorias = useMemo(() => {
+    return Array.from(cursadas).filter(
+      (c) => materiasMap.get(c)?.obrigatoria
+    ).length;
+  }, [cursadas, materiasMap]);
 
   return (
     <div className={styles.gradeContainer}>
@@ -94,6 +107,22 @@ export const GradePeriodos: React.FC<GradePeriodosProps> = ({
             <option value="cc" disabled>Ciência da Computação (em breve)</option>
             <option value="si" disabled>Sistemas de Informação (em breve)</option>
           </select>
+
+          {onMudarGrade && (
+            <div className={styles.gradeSelectorWrapper}>
+              <label htmlFor="gradeSelectGradePeriodos" className={styles.gradeLabel}>Currículo:</label>
+              <select
+                id="gradeSelectGradePeriodos"
+                className={styles.gradeSelect}
+                value={grade}
+                onChange={(e) => onMudarGrade(e.target.value as CodigoGrade)}
+                aria-label="Selecionar Grade Curricular"
+              >
+                <option value="2024_1">A partir de 2024/1 (Novo)</option>
+                <option value="2023_2">Até 2023/2 (Antigo)</option>
+              </select>
+            </div>
+          )}
 
           <span style={{ fontSize: '0.85rem', color: '#9ca3af' }}>
             {cursadasObrigatorias} de {totalObrigatorias} obrigatórias cursadas ({Math.round((cursadasObrigatorias / totalObrigatorias) * 100)}%)
