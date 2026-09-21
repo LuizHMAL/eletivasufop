@@ -7,7 +7,7 @@ import { EletivasRealizadasTable } from './components/EletivasRealizadasTable';
 import { DisponiveisView } from './components/DisponiveisView';
 import { MateriasTable } from './components/MateriasTable';
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 const STORAGE_KEY = 'eletivasufop_cursadas';
 
 export function App() {
@@ -196,19 +196,6 @@ export function App() {
             Catálogo Geral de Disciplinas
           </button>
         </div>
-
-        <nav className="navLinks">
-          <a
-            href="http://127.0.0.1:8000/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="navLink"
-            title="Acessar documentação Swagger da API FastAPI"
-          >
-            <span>Docs API</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </nav>
       </header>
 
       {/* Main Content */}

@@ -16,7 +16,7 @@ interface MateriasResponse {
 export type TipoFiltro = 'todas' | 'obrigatorias' | 'eletivas';
 export type CampoOrdenacao = 'codigo' | 'nome' | 'obrigatoria';
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 function normalizarTexto(str: string): string {
   return str

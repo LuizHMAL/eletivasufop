@@ -1,0 +1,26 @@
+{
+  "buildCommand": "npm run build --prefix frontend",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/materias",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/materias/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/materia/(.*)",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
