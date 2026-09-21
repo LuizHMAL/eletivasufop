@@ -1,0 +1,289 @@
+.container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #14161a;
+    border-color: #22252a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badgeCount {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .badgeCount {
+    background-color: rgba(6, 78, 59, 0.4);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.searchInput {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  min-width: 260px;
+  background: #f8fafc;
+  color: inherit;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .searchInput {
+    background: #0f1012;
+    border-color: #2d3139;
+  }
+  .searchInput:focus {
+    border-color: #60a5fa;
+    background: #14161a;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 0.35rem;
+  background: #f1f5f9;
+  padding: 0.2rem;
+  border-radius: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .filters {
+    background: #0f1012;
+  }
+}
+
+.filterBtn {
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filterBtnActive {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .filterBtn {
+    color: #9ca3af;
+  }
+  .filterBtnActive {
+    background: #252830;
+    color: #f3f4f6;
+  }
+}
+
+.tableWrapper {
+  width: 100%;
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tableWrapper {
+    border-color: #22252a;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  .table th {
+    background: #191c22;
+    color: #cbd5e1;
+    border-bottom-color: #282b33;
+  }
+}
+
+.table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+@media (prefers-color-scheme: dark) {
+  .table td {
+    border-bottom-color: #1f2228;
+  }
+}
+
+.rowCursada {
+  background-color: #f0fdf4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rowCursada {
+    background-color: rgba(6, 78, 59, 0.2);
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.checkboxInput {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  accent-color: #10b981;
+}
+
+.codigoTag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: #f1f5f9;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .codigoTag {
+    background: #0b0c0e;
+    color: #e5e7eb;
+    border: 1px solid #22252a;
+  }
+}
+
+.prereqBadge {
+  font-size: 0.72rem;
+  font-family: monospace;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin-right: 0.3rem;
+  display: inline-block;
+}
+
+.prereqCumprido {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.prereqFaltante {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+@media (prefers-color-scheme: dark) {
+  .prereqCumprido {
+    background-color: rgba(6, 78, 59, 0.4);
+    color: #6ee7b7;
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+  .prereqFaltante {
+    background-color: rgba(153, 27, 27, 0.3);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+}
+
+.statusBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.statusCursada {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.statusDisponivel {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.statusBloqueada {
+  background: #6b7280;
+  color: #ffffff;
+}
+

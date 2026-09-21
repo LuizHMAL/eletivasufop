@@ -1,0 +1,267 @@
+.gradeContainer {
+  background-color: #0b0c0e;
+  color: #f3f4f6;
+  border-radius: 12px;
+  border: 1px solid #22252a;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  user-select: none;
+}
+
+/* Top Header Bar */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #1f2228;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.courseSelectorWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.courseSelect {
+  background-color: #0b0c0e;
+  color: #ffffff;
+  border: 1.5px solid #ffffff;
+  padding: 0.45rem 2.2rem 0.45rem 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem top 50%;
+  background-size: 0.65rem auto;
+}
+
+.courseSelect:focus {
+  outline: 2px solid #3b82f6;
+}
+
+/* Quick Actions / Stats */
+.actionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.legendList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #9ca3af;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.dotCursada {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.dotDisponivel {
+  background-color: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+.dotBloqueada {
+  background-color: #374151;
+}
+
+.quickActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quickBtn {
+  background: #1e2229;
+  border: 1px solid #323842;
+  color: #cbd5e1;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quickBtn:hover {
+  background: #2b313b;
+  color: #ffffff;
+  border-color: #4b5563;
+}
+
+/* 10 Columns Grid */
+.gridScrollWrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+}
+
+.gridColumns {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(110px, 1fr));
+  gap: 0.6rem;
+  min-width: 1150px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.columnHeader {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #272a31;
+  margin-bottom: 0.2rem;
+}
+
+/* Card representation */
+.materiaCard {
+  background-color: #14161a;
+  border: 1px solid #282b33;
+  border-radius: 4px;
+  padding: 0.55rem 0.4rem;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 56px;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.materiaCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.cardCodigo {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #e5e7eb;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.15rem;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cardNome {
+  font-size: 0.68rem;
+  line-height: 1.15;
+  color: #9ca3af;
+  text-transform: lowercase;
+  word-break: break-word;
+}
+
+/* Card States */
+/* Cursada (Verde) */
+.cardCursada {
+  background-color: #064e3b;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.cardCursada .cardCodigo {
+  color: #a7f3d0;
+}
+
+.cardCursada .cardNome {
+  color: #d1fae5;
+}
+
+/* Disponível (Dourado/Amarelo brilhante) */
+.cardDisponivel {
+  background-color: #291c0a;
+  border-color: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.25);
+}
+
+.cardDisponivel:hover {
+  border-color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+.cardDisponivel .cardCodigo {
+  color: #fde68a;
+}
+
+.cardDisponivel .cardNome {
+  color: #fef3c7;
+}
+
+/* Bloqueada (Cinza neutro) */
+.cardBloqueada {
+  background-color: #121316;
+  border-color: #22242a;
+  opacity: 0.85;
+}
+
+.cardBloqueada:hover {
+  border-color: #3b82f6;
+  opacity: 1;
+}
+
+.checkIcon {
+  font-size: 0.75rem;
+  color: #34d399;
+  font-weight: 900;
+}
+
+.statusIndicator {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: 0.25rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+}
+
+.statusBadgeCursada {
+  background-color: rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.statusBadgeDisponivel {
+  background-color: rgba(245, 158, 11, 0.3);
+  color: #fcd34d;
+}
+
+.statusBadgeBloqueada {
+  color: #6b7280;
+}
+

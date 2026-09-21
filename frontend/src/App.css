@@ -1,0 +1,91 @@
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background: #111827;
+    border-bottom-color: #1f2937;
+  }
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: inherit;
+}
+
+.brandIcon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navLink {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.15s;
+}
+
+.navLink:hover {
+  color: #3b82f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  .navLink {
+    color: #94a3b8;
+  }
+  .navLink:hover {
+    color: #60a5fa;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem 0.75rem;
+}
+
+.appFooter {
+  border-top: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+  background-color: #ffffff;
+  margin-top: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .appFooter {
+    background-color: #111827;
+    border-top-color: #1f2937;
+    color: #94a3b8;
+  }
+}
