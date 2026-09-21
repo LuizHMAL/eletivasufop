@@ -59,8 +59,13 @@
   gap: 1rem;
 }
 
-.gradeSelectWrapper {
+.navTopRow {
   display: flex;
+  align-items: center;
+}
+
+.gradeSelectWrapper {
+  display: none; /* Oculto no desktop por redundância com os seletores nas seções principais */
   align-items: center;
   gap: 0.4rem;
 }
@@ -154,6 +159,10 @@
     width: 100%;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .gradeSelectWrapper {
+    display: flex;
   }
 
   .gradeSelectLabel {
